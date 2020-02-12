@@ -1,11 +1,16 @@
 package br.com.tmelo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cidade implements Serializable{
@@ -21,6 +26,11 @@ public class Cidade implements Serializable{
 	
 	private String estado;
 
+	@JsonManagedReference	
+	@ManyToMany(mappedBy = "cidades")	
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -37,11 +47,21 @@ public class Cidade implements Serializable{
 		this.estado = estado;
 	}
 
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+	
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	
+	
 	public Cidade() {
 	}
 	
-	public Cidade(String nome, String estado) {
+	public Cidade(Integer id, String nome, String estado) {
 		super();
+		this.id=  id; 
 		this.nome = nome;
 		this.estado = estado;
 	}
@@ -70,6 +90,7 @@ public class Cidade implements Serializable{
 			return false;
 		return true;
 	}
+
 
 	
 	

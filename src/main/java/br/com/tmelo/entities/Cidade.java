@@ -10,60 +10,62 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
-public class Cidade implements Serializable{
+public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	private String estado;
 
-	@JsonManagedReference	
-	@ManyToMany(mappedBy = "cidades")	
+	@ManyToMany(mappedBy = "cidades")
 	private List<Cliente> clientes = new ArrayList<Cliente>();
-	
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer pId) {
+		this.id = pId;
+	}
+
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String pNome) {
+		this.nome = pNome;
 	}
 
 	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setEstado(String pEstado) {
+		this.estado = pEstado;
 	}
 
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-	
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+
+	public void setClientes(List<Cliente> pClientes) {
+		this.clientes = pClientes;
 	}
-	
-	
+
 	public Cidade() {
 	}
-	
-	public Cidade(Integer id, String nome, String estado) {
+
+	public Cidade(Integer pId, String pNome, String pEstado) {
 		super();
-		this.id=  id; 
-		this.nome = nome;
-		this.estado = estado;
+		this.id = pId;
+		this.nome = pNome;
+		this.estado = pEstado;
 	}
 
 	@Override
@@ -91,10 +93,4 @@ public class Cidade implements Serializable{
 		return true;
 	}
 
-
-	
-	
-	
-	
-	
 }

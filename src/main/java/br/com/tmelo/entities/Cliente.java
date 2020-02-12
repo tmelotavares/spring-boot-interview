@@ -14,9 +14,8 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,82 +24,77 @@ public class Cliente implements Serializable{
 	private Integer id;
 
 	private String nome;
-	
+
 	private String sexo;
-	
+
 	private String dtNascimento;
-	
+
 	private Integer idade;
-	
+
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "CLIENTE_CIDADE",
-				joinColumns =  @JoinColumn(name = "cliente_id"),
-				inverseJoinColumns = @JoinColumn(name = "cidade_id"))
+	@JoinTable(name = "CLIENTE_CIDADE", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "cidade_id"))
 	private List<Cidade> cidades = new ArrayList<Cidade>();
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer pId) {
+		this.id = pId;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String pNome) {
+		this.nome = pNome;
 	}
 
 	public String getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setSexo(String pSexo) {
+		this.sexo = pSexo;
 	}
 
 	public String getDtNascimento() {
 		return dtNascimento;
 	}
 
-	public void setDtNascimento(String dtNascimento) {
-		this.dtNascimento = dtNascimento;
+	public void setDtNascimento(String pDtNascimento) {
+		this.dtNascimento = pDtNascimento;
 	}
 
 	public Integer getIdade() {
 		return idade;
 	}
 
-	public void setIdade(Integer idade) {
-		this.idade = idade;
+	public void setIdade(Integer pIdade) {
+		this.idade = pIdade;
 	}
 
 	public List<Cidade> getCidades() {
 		return cidades;
 	}
 
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
+	public void setCidades(List<Cidade> pCidades) {
+		this.cidades = pCidades;
 	}
 
-	
-	public Cliente(){
+	public Cliente() {
 	}
-	
-	
-	
-	public Cliente(Integer id, String nome, String sexo, String dtNascimento, Integer idade) {
+
+	public Cliente(Integer pId, String pNome, String pSexo, String pDtNascimento, Integer pIdade) {
 		super();
-		this.id = id;
-		this.nome = nome;
-		this.sexo = sexo;
-		this.dtNascimento = dtNascimento;
-		this.idade = idade;
-		
+		this.id = pId;
+		this.nome = pNome;
+		this.sexo = pSexo;
+		this.dtNascimento = pDtNascimento;
+		this.idade = pIdade;
+
 	}
 
 	@Override
@@ -127,6 +121,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

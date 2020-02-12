@@ -13,41 +13,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.tmelo.entities.Cidade;
-import br.com.tmelo.services.CidadeService;
+import br.com.tmelo.entities.Cliente;
+import br.com.tmelo.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/cidades")
-public class CidadeResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private CidadeService service;
+	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Cidade obj = service.buscar(id);
+		Cliente obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Cidade obj) {
+	public ResponseEntity<Void> insert(@RequestBody Cliente obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Cidade obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody Cliente obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Cidade>> findByNome(@RequestParam(value = "nome", defaultValue = "") String nome,
-			@RequestParam(value = "estado", defaultValue = "") String estado) {
-		List<Cidade> obj = service.search(nome, estado);
+	public ResponseEntity<List<Cliente>> findByNome(@RequestParam(value = "nome", defaultValue = "") String nome) {
+		List<Cliente> obj = service.search(nome);
 		return ResponseEntity.ok().body(obj);
 
 	}
